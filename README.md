@@ -1,6 +1,6 @@
 # FedoRacing
 
-Responsive website for drifting, car tuning, ECU chiptuning, performance upgrades, and drift and race car enquiries.
+Responsive website for drifting, car tuning, ECU chiptuning, performance upgrades, and drift and race car enquiries. Slovak is the default language; English is available through the SK / EN switch.
 
 ## Local preview
 
@@ -26,7 +26,9 @@ Publish the `dist` directory with any static website host. The entry point is `d
 
 ## Files
 
-- `dist/index.html` — page content
+- `dist/index.html` — Slovak homepage
+- `dist/en.html` — English version
+- `localize.mjs` — Slovak translations; run `node localize.mjs` after editing the English page to regenerate the Slovak homepage
 - `dist/styles.css` — responsive styling
 - `dist/app.js` — navigation, tuning tabs, vehicle filters and email enquiry handling
 - `preview.mjs` — local static preview server
