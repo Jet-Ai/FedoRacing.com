@@ -1,34 +1,49 @@
 # FedoRacing
 
-Responsive website for drifting, car tuning, ECU chiptuning, performance upgrades, and drift and race car enquiries. Slovak is the default language; English is available through the SK / EN switch.
+Slovak-first, English-second performance website. Red brand theme, official logo, visible social links and a roaming helmeted crab mascot with smoke, an on/off control and reduced-motion support.
 
-## Local preview
+## Pages
 
-Requires Node.js. No dependencies or build step are needed.
+- `/index.html` / `/en.html`: services, ECU tuning, projects and contact.
+- `/cars.html` / `/cars-en.html`: searchable car listings and customer submissions (four photos, 5 MB each). Every submission waits for owner approval.
+- `/news.html` / `/news-en.html`: news, blog and events.
+- `/admin.html`: owner moderation and bilingual article editor. No demo inventory or articles are published.
+
+Instagram is FedoRacing. YouTube temporarily links to HillClimbFans as requested. Facebook is visibly marked as coming soon until its URL is supplied. The general enquiry form opens an email draft; visitors send it themselves. Car submissions are saved to the backend and do not send notification emails; review the admin queue.
+
+## Source and previews
+
+`dist/` contains the authored static frontend. Run `node build-community.mjs` to rebuild community pages. `localize.mjs` rebuilds the Slovak homepage from English; run the community builder after it. Copy `dist/*` into `backend/public/` after frontend edits.
+
+`node preview.mjs` runs a static visual preview on port 4173. Listings and admin need the backend; static hosting alone cannot process submissions.
+
+The `backend/` Vinext app provides D1 persistence, R2 photo storage, owner authentication and moderation. With Node 22.13+ and npm:
 
 ```sh
-node preview.mjs
+cd backend
+npm ci
+npm run dev -- --port 5173 --hostname 127.0.0.1
 ```
 
-Open http://127.0.0.1:4173 in your browser.
+Apply `backend/drizzle/0000_damp_pete_wisdom.sql` to the local D1 database before testing. Local-only `.dev.vars` can define `ADMIN_TOKEN`; never commit it. `test-api.mjs` exercises moderation, photo permissions, article drafts, validation and authentication against the local server. Do not run it against production.
 
-## Deployment
+## Hosting recommendation
 
-Publish the `dist` directory with any static website host. The entry point is `dist/index.html`. Connecting FedoRacing.com requires configuring the domain with the chosen host.
+Use Cloudflare Workers for the website/API, D1 for listings/articles and R2 for photos. GitHub retains source. A standalone Worker adapter is included so the business domain need not depend on the private Sites preview.
 
-## Content and enquiries
+1. Create a Cloudflare account, D1 database and R2 bucket.
+2. Copy `wrangler.example.jsonc` to `wrangler.jsonc`; replace the database ID and resource names.
+3. Install backend dependencies, then run from the repository root:
 
-- Email: FedoRacing@gmail.com
-- Phone / WhatsApp: +421 951 215 935
-- The enquiry form opens the visitor's email application with a prepared message. The visitor must send it; there is no backend form submission or storage.
-- Vehicle images are illustrative. Replace them with actual inventory, specifications, and pricing when available.
-- Fonts load from Google Fonts. Car images are included locally.
+```sh
+node backend/node_modules/wrangler/bin/wrangler.js login
+node backend/node_modules/wrangler/bin/wrangler.js d1 migrations apply DB --remote --config wrangler.jsonc
+node backend/node_modules/wrangler/bin/wrangler.js secret put ADMIN_TOKEN --config wrangler.jsonc
+node backend/node_modules/wrangler/bin/wrangler.js deploy --config wrangler.jsonc
+```
 
-## Files
+Use a long, unique, randomly generated administrator secret. Enter it on `/admin.html` only on your own HTTPS domain. It remains in the browser tab session until logout. Keep `AUTH_PROVIDER` set to `token` on standalone hosting; Sites identity headers are trusted only behind the Sites authentication proxy.
 
-- `dist/index.html` — Slovak homepage
-- `dist/en.html` — English version
-- `localize.mjs` — Slovak translations; run `node localize.mjs` after editing the English page to regenerate the Slovak homepage
-- `dist/styles.css` — responsive styling
-- `dist/app.js` — navigation, tuning tabs, vehicle filters and email enquiry handling
-- `preview.mjs` — local static preview server
+Connect `FedoRacing.com` as a Worker custom domain after deployment. This repository does not claim the domain is connected. The existing Sites preview remains owner-private and uses the owner's authenticated identity; its runtime secrets are configured outside Git.
+
+References: [Workers static assets](https://developers.cloudflare.com/workers/static-assets/), [D1 migrations](https://developers.cloudflare.com/d1/reference/migrations/), [R2 bindings](https://developers.cloudflare.com/r2/api/workers/workers-api-usage/).

@@ -1,0 +1,9 @@
+{
+  "name": "fedoracing",
+  "main": "backend/cloudflare-worker.js",
+  "compatibility_date": "2026-05-15",
+  "assets": { "directory": "./dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+  "vars": { "AUTH_PROVIDER": "token" },
+  "d1_databases": [{ "binding": "DB", "database_name": "fedoracing", "database_id": "REPLACE_WITH_YOUR_DATABASE_ID", "migrations_dir": "backend/drizzle" }],
+  "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "fedoracing-photos" }]
+}

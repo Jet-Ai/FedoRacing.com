@@ -17,7 +17,7 @@ function selectTune(tab) { tabs.forEach(t => {t.setAttribute('aria-selected', St
 tabs.forEach((tab, i) => {tab.addEventListener('click', () => selectTune(tab)); tab.addEventListener('keydown', e => {let next; if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length]; if (e.key === 'ArrowLeft') next = tabs[(i + tabs.length - 1) % tabs.length]; if (e.key === 'Home') next = tabs[0]; if (e.key === 'End') next = tabs[tabs.length - 1]; if (next) {e.preventDefault(); selectTune(next); next.focus();}});});
 document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {document.querySelectorAll('[data-filter]').forEach(b => {b.classList.toggle('active', b === button); b.setAttribute('aria-pressed', String(b === button));}); document.querySelectorAll('[data-category]').forEach(card => {card.hidden = button.dataset.filter !== 'all' && card.dataset.category !== button.dataset.filter;});}));
 document.querySelectorAll('[data-service]').forEach(button => button.addEventListener('click', () => {document.querySelector('#service-select').value = button.dataset.service; if (button.tagName === 'BUTTON') {document.querySelector('#contact').scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'}); document.querySelector('#service-select').focus({preventScroll:true});}}));
- document.querySelector('#enquiry-form').addEventListener('submit', event => {
+ document.querySelector('#enquiry-form')?.addEventListener('submit', event => {
  event.preventDefault();
  const data = new FormData(event.currentTarget);
  const service = document.querySelector('#service-select').selectedOptions[0].textContent;
