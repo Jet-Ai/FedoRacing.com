@@ -1,6 +1,6 @@
 # FedoRacing
 
-Slovak-first, English-second performance website. Red brand theme, official logo, visible social links and a roaming helmeted crab mascot with smoke, an on/off control and reduced-motion support.
+Slovak-first, English-second performance website. Red brand theme, official logo, visible social links.
 
 ## Pages
 
