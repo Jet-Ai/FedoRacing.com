@@ -2,7 +2,7 @@ import fs from 'node:fs';
 const pairs = [
 ['FOLLOW FEDORACING','SLEDUJTE FEDORACING'],['Find us on Instagram','Nájdete nás na Instagrame'],['Visit our profile','Pozrieť profil'],
 ['What we do','Služby'],['Cars & builds','Autá a projekty'],['Our approach','Náš prístup'],['LET’S TALK','KONTAKT'],
-['PERFORMANCE IS A MINDSET.','VÝKON JE NÁŠ ŽIVOTNÝ ŠTÝL.'],['BUILT TO GO','STVORENÉ NA'],['SIDEWAYS.','DRIFT.'],
+['PERFORMANCE IS A MINDSET.','VÝKON JE NÁŠ ŽIVOTNÝ ŠTÝL.'],['BUILT TO GO','BUILT TO GO'],['SIDEWAYS!','SIDEWAYS!'],
 ['More control. More response. More you.','Viac kontroly. Lepšia odozva. Váš štýl.'],['From precision tuning to your next race car.','Od precízneho tuningu po vaše ďalšie pretekárske auto.'],['This is FedoRacing.','Toto je FedoRacing.'],
 ['EXPLORE OUR SERVICES','POZRIEŤ SLUŽBY'],['Find your next car','Nájdite si svoje auto'],['DRIFTING IS OUR DNA. PERFORMANCE IS OUR PURPOSE.','DRIFT MÁME V DNA. VÝKON JE NAŠÍM CIEĽOM.'],['SCROLL TO EXPLORE','OBJAVTE VIAC'],
 ['DRIFT BUILDS','DRIFTOVÉ PROJEKTY'],['PERFORMANCE UPGRADES','ÚPRAVY VÝKONU'],['RACE CAR SALES','PREDAJ PRETEKÁRSKYCH ÁUT'],
