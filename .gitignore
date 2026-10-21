@@ -1,0 +1,11 @@
+fedoracing/
+fedoracing-preview.png
+fedoracing-site.tar.gz
+asset-notes.md
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
